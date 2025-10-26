@@ -1,0 +1,85 @@
+PROGRAM SimpleCalculator
+
+    // Initialize control variable
+    SET continue_program = TRUE
+    
+    // Main program loop
+    WHILE continue_program DO
+        
+        // Step 1: Display menu of operations
+        DISPLAY "===== CALCULATOR MENU ====="
+        DISPLAY "1. Addition"
+        DISPLAY "2. Subtraction"
+        DISPLAY "3. Multiplication"
+        DISPLAY "4. Division"
+        DISPLAY "5. Exit"
+        DISPLAY "==========================="
+        
+        // Step 2: Get user's operation choice
+        DISPLAY "Enter your choice (1-5): "
+        INPUT operation_choice
+        
+        // Check if user wants to exit
+        IF operation_choice == 5 THEN
+            DISPLAY "Thank you for using the calculator. Goodbye!"
+            SET continue_program = FALSE
+            BREAK
+        END IF
+        
+        // Validate operation choice
+        IF operation_choice < 1 OR operation_choice > 4 THEN
+            DISPLAY "Error: Invalid operation. Please choose 1-4."
+            CONTINUE  // Go back to start of loop
+        END IF
+        
+        // Step 2: Get two numbers from user
+        DISPLAY "Enter the first number: "
+        INPUT num1
+        
+        DISPLAY "Enter the second number: "
+        INPUT num2
+        
+        // Step 3: Perform operation based on user's choice
+        IF operation_choice == 1 THEN
+            // Addition
+            SET result = num1 + num2
+            DISPLAY num1 + " + " + num2 + " = " + result
+            
+        ELSE IF operation_choice == 2 THEN
+            // Subtraction
+            SET result = num1 - num2
+            DISPLAY num1 + " - " + num2 + " = " + result
+            
+        ELSE IF operation_choice == 3 THEN
+            // Multiplication
+            SET result = num1 * num2
+            DISPLAY num1 + " × " + num2 + " = " + result
+            
+        ELSE IF operation_choice == 4 THEN
+            // Division with zero check
+            IF num2 == 0 THEN
+                DISPLAY "Error: Cannot divide by zero!"
+            ELSE
+                SET result = num1 / num2
+                DISPLAY num1 + " ÷ " + num2 + " = " + result
+            END IF
+        END IF
+        
+        // Step 4: Ask if user wants to perform another calculation
+        DISPLAY ""
+        DISPLAY "Do you want to perform another calculation? (yes/no): "
+        INPUT user_response
+        
+        // Convert response to lowercase for easier comparison
+        SET user_response = LOWERCASE(user_response)
+        
+        IF user_response == "no" OR user_response == "n" THEN
+            DISPLAY "Thank you for using the calculator. Goodbye!"
+            SET continue_program = FALSE
+        END IF
+        
+        DISPLAY ""  // Blank line for readability
+        
+    END WHILE
+
+END PROGRAM
